@@ -19,6 +19,9 @@ def codegenView(request):
 def imagegenView(request):
     return render(request, "imagegen.html")
 
-def gen(request):
-    response = openai.Completion.create(model="text-davinci-003", prompt=request.GET.get("prompt"), max_tokens=256)
+def gen(request, model):
+    if model == "text":
+        response = openai.Completion.create(model="text-davinci-003", prompt=request.GET.get("prompt"), max_tokens=256)
+    elif model == "code":
+        response = openai.Completion.create(model="code-davinci-002", prompt=request.GET.get("prompt"), max_tokens=256)
     return JsonResponse(response["choices"][0]["text"], safe=False)

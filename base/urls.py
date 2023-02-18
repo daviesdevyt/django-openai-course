@@ -6,5 +6,5 @@ urlpatterns = [
     path("text-generator/", views.textgenView, name="textgen"),
     path("code-generator/", views.codegenView, name="codegen"),
     path("image-generator/", views.imagegenView, name="imagegen"),
-    path("gen/", views.gen)
+    path("gen/<str:model>/", views.gen)
 ]
