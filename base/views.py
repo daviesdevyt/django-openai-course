@@ -24,4 +24,8 @@ def gen(request, model):
         response = openai.Completion.create(model="text-davinci-003", prompt=request.GET.get("prompt"), max_tokens=256)
     elif model == "code":
         response = openai.Completion.create(model="code-davinci-002", prompt=request.GET.get("prompt"), max_tokens=256)
+    elif model == "image":
+        response = openai.Image.create(prompt=request.GET.get("prompt"), n=3, size="1024x1024")
+        print(response)
+        return JsonResponse(response["data"], safe=False)
     return JsonResponse(response["choices"][0]["text"], safe=False)
